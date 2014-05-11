@@ -1,0 +1,6 @@
+#how to create a git repository 
+1. curl -u 'user_name' https://api.github.com/user/repos -d '{"name":"projectname", "description":"desc for the project"}'
+
+2. git remote add github git@github.com:user_name/proejctname.git
+
+3. git push -u github master
