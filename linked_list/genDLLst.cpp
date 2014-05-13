@@ -4,6 +4,7 @@
 template<class T>
 void DoublyLinkedList<T>::addToHead(const T& el){
 	head = new DLLNode<T>(el, head, 0);
+	head->next->prev = head; //this is important: after adding a new node at the head, should let its succussor point back to it.
 	if(tail == 0)
 		tail = head;
 }
@@ -25,9 +26,9 @@ T DoublyLinkedList<T>::deleteFromHead(){
 	}else{
 		DLLNode<T> *tmp;
 		tmp = head;
-		head = head->next;
+		head = head->next; 
 		delete tmp;
-		head->prev = 0;
+		head->prev = 0; //this is important: after let the head point to its succussor, should let this new head point back to null
 	}
 	return el;
 }
@@ -61,12 +62,14 @@ int main(void){
 	list.addToHead('b');
 	list.addToTail('a');
 	list.addToHead('d');
+	for(int i =0; i < 10; i++){
+		list.addToHead('*');
+	}
 	
-	list.printList();
-	std::cout<<std::endl;
 
-	std::cout<<list.deleteFromTail()<<std::endl;
-	std::cout<<list.deleteFromHead()<<std::endl;
+	for(int i = 0; i < 12; i++){
+		std::cout<<list.deleteFromTail()<<std::endl;
+	}
 
 	list.printList();
 }
