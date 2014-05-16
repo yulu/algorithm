@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include "genSkipL.h"
 
 template<class T>
@@ -8,15 +9,24 @@ SkipList<T>::SkipList(){
 }
 
 template<class T>
-SkipList<T>::isEmpty() const{
+bool SkipList<T>::isEmpty() const{
 	return root[0] == 0;
 }
 
 template<class T>
-bool SkipList<T>::choosePowers(){
+void SkipList<T>::choosePowers(){
 	powers[maxLevel - 1] = (2 << (maxLevel-1)) - 1; //2^maxLevel -1
 	for(int i = maxLevel - 2, j = 0; i >= 0; i--, j++)
 		powers[i] = powers[i+1] - (2 << j); //2^(j+1)
+}
+
+template<class T>
+int SkipList<T>::chooseLevel(){
+	int i, r = rand()%powers[maxLevel-1]+1;
+	for(i = 1; i < maxLevel; i++)
+		if(r < powers[i])
+			return i-1;
+	return i -1;
 }
 
 template<class T>
@@ -59,7 +69,7 @@ void SkipList<T>::skipListInsert(const T& key){
 	for(lvl = maxLevel -1; lvl >= 0; lvl--){
 		while(curr[lvl] && curr[lvl]->key < key){
 			prev[lvl] = curr[lvl];
-			curr[lvl] = *(curr[lvl]->key + lvl);
+			curr[lvl] = *(curr[lvl]->next + lvl);
 		}
 		if(curr[lvl] && curr[lvl]->key == key)
 			return;
@@ -75,8 +85,8 @@ void SkipList<T>::skipListInsert(const T& key){
 	}
 	
 	lvl = chooseLevel();
-	newNode = new SKipListNode<T>;
-	newNode->next = new nodePtr[sizepf(nodePtr) * (lvl+1)];
+	newNode = new SkipListNode<T>;
+	newNode->next = new nodePtr[sizeof(nodePtr) * (lvl+1)];
 	newNode->key = key;
 	for(i = 0; i <= lvl; i++){
 		*(newNode->next + i) == curr[i];
@@ -84,4 +94,16 @@ void SkipList<T>::skipListInsert(const T& key){
 			root[i] = newNode;
 		else *(prev[i]->next + i) = newNode;
 	}
+}
+
+int main(void){
+	SkipList<int> list;
+	list.skipListInsert(1);
+	list.skipListInsert(2);
+	list.skipListInsert(5);
+	list.skipListInsert(3);
+	int* x = list.skipListSearch(2);
+	std::cout<<*x<<std::endl;
+
+	return 0;
 }
