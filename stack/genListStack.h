@@ -2,6 +2,10 @@
 #define LL_STACK
 
 #include <list>
+#include <algorithm>
+#include <functional>
+
+using namespace std;
 
 template<class T>
 class LLStack{
