@@ -175,3 +175,47 @@ void BST<T>::deleteByMergying(BSTNode<T>*& node){
 		delete tmp;
 	}
 }
+
+template<class T>
+void BST<T>::findAndDeleteByMerging(const T& el){
+	BSTNode<T> *node = root, *prev = 0;
+	while(node != 0){
+		if(node->key == el)
+			break;
+		prev = node;
+		if(node->key < el)
+			node = node->right;
+		else node = node->left;
+	}
+	if(node != 0 && node->key == el)
+		if(node == root)
+			deleteByMerging(root);
+		else if (prev->left == node)
+			deleteByMerging(prev->left);
+		else deleteByMerging(prev->right);
+	else if(root != 0)
+		cout<< "key " <<el<<" is not in the tree\n";
+	else cout << "the tree is empty\n";
+}
+
+template<class T>
+void BST<T>::deleteByCopying(BSTNode<T>*& node){
+	BSTNode<T> *previous, *tmp = node;
+	if(node->right==0)
+		node = node->left;
+	else if(node->left==0)
+		node = node->right;
+	else{
+		tmp = node->left;
+		previous = node;
+		while(tmp->right != 0){
+			previous = tmp;
+			tmp = tmp->right;
+		}
+		node->key = tmp->key;
+		if(previous == node)
+			previous->left == tmp->left;
+		else previous->right = tmp->left;
+	}
+	delete tmp;
+}
