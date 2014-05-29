@@ -1,3 +1,5 @@
+#include "genBST.h"
+
 template<class T>
 T* BST<T>::search(BSTNode<T>* p, const T& el) const{
 	while(p != 0)
