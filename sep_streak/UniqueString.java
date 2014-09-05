@@ -1,3 +1,6 @@
+/*
+ *sep 5
+ */
 public class UniqueString {
 	public static void main(String[] args) {
 		String test = "thiseloojke";
