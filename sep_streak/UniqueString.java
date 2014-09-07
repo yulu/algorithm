@@ -1,5 +1,5 @@
 /*
- *sep 5
+ *sep 5 cci 1.1
  */
 public class UniqueString {
 	public static void main(String[] args) {

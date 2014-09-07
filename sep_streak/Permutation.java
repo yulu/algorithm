@@ -1,5 +1,5 @@
 /*
- *sep 5
+ *sep 5 cci 1.3
  */
 public class Permutation {
 	public static void main(String[] args) {

@@ -1,3 +1,7 @@
+/*
+ * Sep 6 cci 1.4
+ */
+
 public class Replace {
 	public static void main(String[] args) {
 		char[] test="this is a test                      ".toCharArray();
