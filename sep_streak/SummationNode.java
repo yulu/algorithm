@@ -83,4 +83,29 @@ public class SummationNode {
 	
 		return sum;
 	}
+	
+	private static Node Sum2(Node s1, Node s2) {
+		//find the length of the two list
+
+		//make them equal length by adding 0s in front of the shorter one
+
+		//recursive add the nodes
+		
+
+	}
+
+	private static Node AddNode(Node n1, Node n2, int r) {
+		Node pt = new Node();
+		int s = (n1 + n2 + r)%10;
+		int d = (n1 + n2 + r)/10;
+
+		pt.value = s;
+
+		if (d > 0) {
+			pt.addToHead(d);
+		}
+
+		return pt;
+	}
+			
 }
