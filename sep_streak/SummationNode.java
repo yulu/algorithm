@@ -35,6 +35,14 @@ public class SummationNode {
 			value = v;
 		}
 
+		public void addToHead(int v) {
+			Node pt = this;
+			Node newP = new Node(v);
+		
+			newP.next = this.next;
+			this.next = newP;
+		}
+
 		public void addToTail(int v) {
 			Node pt = this;
 			while ( pt.next != null ) {
@@ -83,29 +91,43 @@ public class SummationNode {
 	
 		return sum;
 	}
-	
+/*
 	private static Node Sum2(Node s1, Node s2) {
 		//find the length of the two list
-
+		
 		//make them equal length by adding 0s in front of the shorter one
 
 		//recursive add the nodes
+
+		//check the leading digit
+
+		//remove the tail node
 		
 
 	}
+*/
+	private static Node SumDigit(Node head1, Node head2) {
+		if (head1 == null && head2 == null)
+			return new Node();
 
-	private static Node AddNode(Node n1, Node n2, int r) {
-		Node pt = new Node();
-		int s = (n1 + n2 + r)%10;
-		int d = (n1 + n2 + r)/10;
+		Node h=SumDigit(head1.next, head2.next);
+		int d = head1.value + head2.value + h.value/10;
+		h.value = h.value%10;
+		h.addToHead(d);
 
-		pt.value = s;
+		return h;
+	}
 
-		if (d > 0) {
-			pt.addToHead(d);
+	private static int findLength(Node n) {
+		Node pt = n.next;
+		int c = 0;
+		while(pt.next != null) {
+			pt = pt.next;
+			c++;
 		}
 
-		return pt;
+		return c;
 	}
+
 			
 }
