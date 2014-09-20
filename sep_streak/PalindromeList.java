@@ -1,3 +1,6 @@
+/*
+ * Sep 17 cci 2.7
+ */
 public class PalindromeList {
 	public static void main(String[] args) {
 		Node list = new Node();
